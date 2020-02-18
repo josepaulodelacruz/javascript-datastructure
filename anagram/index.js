@@ -1,35 +1,34 @@
-function swap(chars, i, j) {
-    var tmp = chars[i];
-    chars[i] = chars[j];
-    chars[j] = tmp;
-}
+/**
+ * Given two strings, write a function to determine if the
+ * second string is an anagram of the first. An anagram is a word,
+ * phrase, or name formed by rearranging the
+ * letters of another, such as cinema, formed from iceman
+ */
 
-function combination(input) {
-    var counter = [],
-        word = [],
-        chars = input.split(''),
-        length = chars.length,
-        i;
+function validAnagram(string1, string2) {
+  if(string1.length !== string2.length) {
+    return false
+  }
 
-    for (i = 0; i < length; i++) {
-        counter[i] = 0;
+  let charCount = {}
+
+  for(let i = 0 ; i < string1.length ; i++) {
+    let letter = string1[i]
+    charCount[letter] ? charCount[letter] += 1 : charCount[letter] = 1
+  }
+
+  for(let i = 0 ; i < string2.length ; i++) {
+    let letter = string2[i]
+    if(!charCount[letter]) {
+      return false
+    } else {
+      charCount[letter] -= 1
     }
 
-    word.push(input);
-    i = 0;
-    while (i < length) {
-        if (counter[i] < i) {
-            swap(chars, i % 2 === 1 ? counter[i] : 0, i);
-            counter[i]++;
-            i = 0;
-            word.push(chars.join(''));
-        } else {
-            counter[i] = 0;
-            i++;
-        }
-    }
+  }
 
-    return word;
+  return true
+
 }
 
-console.log(combination(''))
+console.log(validAnagram('anagram', 'nagaram'))
