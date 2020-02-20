@@ -18,7 +18,6 @@ function sumZero(arr) {
     } else {
       left++
     }
-
   }
 
 
